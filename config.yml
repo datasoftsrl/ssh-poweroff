@@ -1,0 +1,19 @@
+# application title
+title: Projector Poweroff
+
+# devices properties (DO NOT USE TABS)
+devices:
+  - name: Device 1
+    host: 255.255.255.255
+    port: 22
+    user: root
+    password: toor
+  - name: Device 2
+    host: 255.255.255.255
+    port: 22
+    user: root
+    password: toor
+
+# command to execute
+command:
+  shutdown: halt

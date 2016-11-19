@@ -1,0 +1,47 @@
+html {
+  color: #f2f2f2;
+  background-color: #f2f2f2;
+}
+
+p {
+  width: 100%;
+}
+
+a {
+  color: #607d8b;
+  border-bottom: 1px dotted #607d8b;
+  text-decoration: none;
+}
+
+h1, h2 {
+  color: #0c0c0c;
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 5rem;
+}
+
+h2 {
+  color: #607d8b;
+  font-size: 1.5rem;
+}
+
+.container h1,
+.container h2{  
+  text-align: center;
+}
+
+.container p {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.box {
+  height: 150px !important;
+  margin: 20px 10px !important;
+}
+
+.prop {
+  height: 50%;
+}

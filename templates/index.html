@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+    <link rel="shortcut icon"
+      href="{{ url_for('static', filename='favicon.ico') }}" />
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/reset.css') }}" />
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/materialize.min.css') }}" />
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}" />
+  </head>
+                          
+  <body>
+    <div class="container wrapper">
+      <h1>{{ title }}</h1>
+      <h2>
+        <a href="mailto:info@datasoftweb.com">info@datasoftweb.com</a>
+        | &reg;
+        <a href="http://www.datasoftweb.com">DataSoft Srl</a>
+      </h2>
+      <div class="row">
+        {%- for color,dev in devices %}
+        <div id="device" class="col s12 m12 l6">
+          <div class="row {{ color }} lighten-1 box hoverable"
+            onclick="sendAddress('{{ dev['name'] }}')">
+            <div class="valign-wrapper col s12 m12 l12 prop">
+              <p class="valign center-align">
+                {{ dev['name'] }}
+              </p>
+            </div>
+            <div class="valign-wrapper col s12 m12 l12 prop">
+              <p class="valign center-align">
+                {{ dev['host'] }}
+              </p>
+            </div>
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+    </div>
+
+    <script type="text/javascript"
+      src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script type="text/javascript"
+      src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+  </body>
+</html>
