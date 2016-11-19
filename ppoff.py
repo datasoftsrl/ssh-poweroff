@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 # _*_ coding: utf-8 _*_
 
-import sys
+import sys, random
 from os import path
 
 import yaml
 from flask import (
   Flask,
+  request,
   render_template
+)
+from pexpect.pxssh import (
+  pxssh,
+  ExceptionPxssh
 )
 
 CONF_PATH = path.join(
@@ -29,6 +34,37 @@ except:
     file=sys.stderr
   )
 
+def _random_colors():
+  """
+  Returns a generators with names of random colors.
+  """
+  colors = [
+    'red',
+    'pink',
+    'deep-purple',
+    'indigo',
+    'blue',
+    'light-blue',
+    'cyan',
+    'teal',
+    'green',
+    'light-green',
+    'orange',
+    'deep-orange',
+    'brown',
+    'blue-grey'
+  ]
+
+  random.shuffle(colors)
+  
+  count = 0
+  length = len(colors)
+  while True:
+    if count == length:
+      count = 0
+    yield colors[count]
+    count += 1
+
 @app.route('/')
 def home():
   """
@@ -44,3 +80,37 @@ def home():
     devices = zip(_random_colors(), config['devices']),
     command = 'shutdown'
   )
+
+@app.route('/command', methods=['POST'])
+def command():
+  """
+  Executes a command when triggered.
+  Available commands:
+  - "shutdown": shuts down the machine
+    command: 'shutdown'
+    name: name of device to shut down
+  """
+  global config, devices
+
+  if request.method == 'POST':
+    if request.form['command'] == 'shutdown':
+      cmd = config['command']['shutdown']
+      name = request.form['id']
+      try:
+        properties = devices[name]
+        ssh = pxssh()
+        ssh.login(
+          server = properties['host'],
+          username = properties['user'],
+          password = properties['password'],
+          port = properties['port']
+        )
+        ssh.sendline(cmd)
+        ssh.logout()
+        return '{} successfully turned off.'.format(name)
+      except (KeyError, ExceptionPxssh) as e:
+        if isinstance(e, KeyError):
+          return '{} does not exist!'.format(name)
+        elif isinstance(e, ExceptionPxssh):  
+          return 'Could not communicate with {}!'.format(name)
+    return 'Command not understood!'
