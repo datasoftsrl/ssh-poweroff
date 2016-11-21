@@ -15,6 +15,8 @@ from pexpect.pxssh import (
   ExceptionPxssh
 )
 
+VERSION = '1.0.0'
+
 CONF_PATH = path.join(
   path.dirname(__file__),
   'config.yml'
@@ -98,6 +100,7 @@ def home():
 
   return render_template('index.html',
     title = config['title'],
+    version = VERSION,
     action = '/shutdown',
     devices = zip(_random_colors(), config['devices']),
     command = 'shutdown'

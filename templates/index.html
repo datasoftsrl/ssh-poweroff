@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{{ title }}</title>
+    <title>{{ title }} {{ version }}</title>
     <link rel="shortcut icon"
       href="{{ url_for('static', filename='favicon.ico') }}" />
     <link rel="stylesheet"
@@ -15,7 +15,7 @@
                           
   <body>
     <div class="container wrapper">
-      <h1>{{ title }}</h1>
+      <h1>{{ title }} {{ version }}</h1>
       <h2>
         <a href="mailto:info@datasoftweb.com">info@datasoftweb.com</a>
         | &reg;
