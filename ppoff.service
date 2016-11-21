@@ -1,0 +1,17 @@
+[Unit]
+Description=Projector Poweroff web service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/gunicorn -b 0.0.0.0:8000 ppoff:app
+WorkingDirectory=/opt/projector-poweroff
+Restart=always
+RestartSec=10
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ppoff
+User=root
+Group=root
+
+[Install]
+WantedBy=multi-user.target
