@@ -28,7 +28,8 @@ if __name__ == '__main__':
       # installation commands (it will remove everything in 
       sp.run(['pip3', 'install', 'flask pyyaml gunicorn pexpect'],
         stdin=sp.DEVNULL, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
-      sp.run(['git', 'clone', REPO, WD])
+      sp.run(['git', 'clone', REPO, WD],
+        stdin=sp.DEVNULL, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
       sp.run(['rm', '-rf', PATH],
         stdin=sp.DEVNULL, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
       sh.copytree(WD, PATH)
