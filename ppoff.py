@@ -27,12 +27,34 @@ Load config and throw an error if config is not good.
 """
 try:
   config = yaml.safe_load(open(CONF_PATH))
-  devices = {x['name']: x for x in config['devices']}
 except:
   print(
-    'Ops, I found an error reading {}'.format('config.yml'),
+    'Ops, I found an error reading {}, using default.'.format('config.yml'),
     file=sys.stderr
   )
+  config = {}
+
+"""
+Check if config key is present, otherwise use default.
+"""
+default = {
+  'title': 'Poweroff',
+  'devices': [],
+  'command': {
+    'shutdown': 'halt'
+  }
+}
+default.update(config)
+config = default
+del default
+
+"""
+Cache a 'devices' dict for ease of use.
+"""
+if len(config['devices']) > 0:
+  devices = {x['name']: x for x in config['devices']}
+else:
+  devices = {}
 
 def _random_colors():
   """
