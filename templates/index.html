@@ -22,14 +22,6 @@
         <a href="http://www.datasoftweb.com">DataSoft Srl</a>
       </h2>
       <div class="row">
-        <div id="all" class="col s12 m12 l12">
-          <div class="valign-wrapper blue-grey darken-2 box hoverable"
-            onclick="multipleDevices({{ dev_names|safe }})">
-            <p class="valign center-align">
-              {{ all_button }}
-            </p>
-          </div>
-        </div>
         {%- for color,dev in col_dev %}
         <div id="device" class="col s12 m12 l6">
           <div class="row {{ color }} lighten-1 box hoverable"
@@ -47,6 +39,15 @@
           </div>
         </div>
         {%- endfor %}
+        <div id="all" class="col s12 m12 l12">
+          <div class="valign-wrapper blue-grey darken-2 box hoverable"
+            onclick="multipleDevices({{ dev_names|safe }})">
+            <p class="valign center-align">
+              {{ all_button }}
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
 

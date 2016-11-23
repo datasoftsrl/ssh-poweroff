@@ -15,7 +15,7 @@ from pexpect.pxssh import (
   ExceptionPxssh
 )
 
-VERSION = '1.1.0'
+VERSION = '1.1.1'
 
 CONF_PATH = path.join(
   path.dirname(__file__),
