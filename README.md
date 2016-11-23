@@ -1,4 +1,4 @@
-# Project Poweroff
+# SSH Poweroff
 This utility exposes a webpage that gives the possibility to launch commands to
 different devices in the network by means of the ssh protocol.
 
