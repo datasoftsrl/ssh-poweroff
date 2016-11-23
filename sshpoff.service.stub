@@ -1,10 +1,10 @@
 [Unit]
-Description=Projector Poweroff web service
+Description=SSH Poweroff web service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/gunicorn -b 0.0.0.0:8000 ppoff:app
-WorkingDirectory=/opt/projector-poweroff
+ExecStart=/usr/bin/gunicorn -b 0.0.0.0:<port> sshpoff:app
+WorkingDirectory=/opt/ssh-poweroff
 Restart=always
 RestartSec=10
 StandardOutput=syslog

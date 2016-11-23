@@ -15,7 +15,7 @@ from pexpect.pxssh import (
   ExceptionPxssh
 )
 
-VERSION = '1.0.0'
+VERSION = '1.1.0'
 
 CONF_PATH = path.join(
   path.dirname(__file__),
@@ -101,7 +101,6 @@ def home():
   return render_template('index.html',
     title = config['title'],
     version = VERSION,
-    action = '/shutdown',
     devices = zip(_random_colors(), config['devices']),
     command = 'shutdown'
   )
@@ -109,33 +108,28 @@ def home():
 @app.route('/command', methods=['POST'])
 def command():
   """
-  Executes a command when triggered.
-  Available commands:
-  - "shutdown": shuts down the machine
-    command: 'shutdown'
-    name: name of device to shut down
+  Executes a command to a given device (form field 'id') when triggered.
   """
   global config, devices
 
   if request.method == 'POST':
-    if request.form['command'] == 'shutdown':
-      cmd = config['command']['shutdown']
-      name = request.form['id']
-      try:
-        properties = devices[name]
-        ssh = pxssh()
-        ssh.login(
-          server = properties['host'],
-          username = properties['user'],
-          password = properties['password'],
-          port = properties['port']
-        )
-        ssh.sendline(cmd)
-        ssh.logout()
-        return '{} successfully turned off.'.format(name)
-      except (KeyError, ExceptionPxssh) as e:
-        if isinstance(e, KeyError):
-          return '{} does not exist!'.format(name)
-        elif isinstance(e, ExceptionPxssh):  
-          return 'Could not communicate with {}!'.format(name)
-    return 'Command not understood!'
+    name = request.form['id']
+    try:
+      properties = devices[name]
+      ssh = pxssh()
+      ssh.force_password = True
+      ssh.options['StrictHostKeyChecking'] = 'no'
+      ssh.login(
+        server = properties['host'],
+        username = properties['user'],
+        password = properties['password'],
+        port = properties['port']
+      )
+      ssh.sendline(properties['command'])
+      ssh.logout()
+      return '{} successfully turned off.'.format(name)
+    except (KeyError, ExceptionPxssh) as e:
+      if isinstance(e, KeyError):
+        return '{} does not exist!'.format(name)
+      elif isinstance(e, ExceptionPxssh):  
+        return 'Could not communicate with {}!'.format(name)

@@ -1,5 +1,6 @@
-# application title
-title: Projector Poweroff
+# application properties
+title: SSH Poweroff
+port: 8081
 
 # devices properties (DO NOT USE TABS)
 devices:
@@ -8,12 +9,10 @@ devices:
     port: 22
     user: root
     password: toor
+    command: halt
   - name: Device 2
     host: 255.255.255.255
     port: 22
     user: root
     password: toor
-
-# command to execute
-command:
-  shutdown: halt
+    command: halt

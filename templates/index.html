@@ -25,7 +25,7 @@
         {%- for color,dev in devices %}
         <div id="device" class="col s12 m12 l6">
           <div class="row {{ color }} lighten-1 box hoverable"
-            onclick="sendAddress('{{ dev['name'] }}')">
+            onclick="sendDevice('{{ dev['name'] }}')">
             <div class="valign-wrapper col s12 m12 l12 prop">
               <p class="valign center-align">
                 {{ dev['name'] }}
@@ -47,12 +47,11 @@
     <script type="text/javascript"
       src="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
     <script type+"text/javascript">
-      function sendAddress(id) {
+      function sendDevice(id) {
         $.ajax({
           url: '{{ url_for('command') }}',
           type: 'POST',
           data: {
-            command: 'shutdown',
             id: id
           },
           success: function(msg) {
