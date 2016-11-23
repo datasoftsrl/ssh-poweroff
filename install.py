@@ -49,13 +49,13 @@ if __name__ == '__main__':
       with open(path.join(PATH, 'sshpoff.service.stub'), 'r') as r_serv:
         with open('/etc/systemd/system/sshpoff.service', 'w') as w_serv:
           lines = r_serv.read()
-          w_serv.write(lines.replace('<port>', config['port'], 1))
+          w_serv.write(lines.replace('<port>', str(config['port']), 1))
 
       # activate systemd service
       cmd(['systemctl', 'daemon-reload'])
       cmd(['systemctl', 'enable', 'sshpoff'])
       cmd(['systemctl', 'start', 'sshpoff'])
-    except Error as e:
+    except Exception as e:
       print(e)
       sys.exit(255)
   else:
