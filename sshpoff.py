@@ -42,9 +42,10 @@ Check if config key is present, otherwise use default.
 default = {
   'title': 'Poweroff',
   'devices': [],
-  'command': {
-    'shutdown': 'halt'
-  }
+  'poweroff_all': 'Power off all devices!',
+  'success_msg': '{} successfully turned off.',
+  'unvalid_msg': '{} is not valid!',
+  'no_ssh_msg': 'Could not communicate with {}!'
 }
 default.update(config)
 config = default
@@ -101,8 +102,9 @@ def home():
   return render_template('index.html',
     title = config['title'],
     version = VERSION,
-    devices = zip(_random_colors(), config['devices']),
-    command = 'shutdown'
+    dev_names = list(devices.keys()),
+    col_dev = zip(_random_colors(), config['devices']),
+    all_button = config['poweroff_all']
   )
 
 @app.route('/command', methods=['POST'])
@@ -127,9 +129,9 @@ def command():
       )
       ssh.sendline(properties['command'])
       ssh.logout()
-      return '{} successfully turned off.'.format(name)
+      return config['success_msg'].format(name)
     except (KeyError, ExceptionPxssh) as e:
       if isinstance(e, KeyError):
-        return '{} does not exist!'.format(name)
+        return config['unvalid_msg'].format(name)
       elif isinstance(e, ExceptionPxssh):  
-        return 'Could not communicate with {}!'.format(name)
+        return config['no-ssh_msg'].format(name)

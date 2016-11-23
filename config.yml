@@ -1,18 +1,27 @@
 # application properties
-title: SSH Poweroff
+title: "SSH Poweroff"
 port: 8081
 
 # devices properties (DO NOT USE TABS)
 devices:
-  - name: Device 1
-    host: 255.255.255.255
+  - name: "Device 1"
+    host: "255.255.255.255"
     port: 22
-    user: root
-    password: toor
-    command: halt
-  - name: Device 2
-    host: 255.255.255.255
+    user: "root"
+    password: "toor"
+    command: "halt"
+  - name: "Device 2"
+    host: "255.255.255.255"
     port: 22
-    user: root
-    password: toor
-    command: halt
+    user: "root"
+    password: "toor"
+    command: "halt"
+
+# button messages
+poweroff_all: "Power off all devices!"
+
+# error/success messages
+# {} is replaced with device name
+success_msg: "{} successfully turned off."
+unvalid_msg: "{} is not valid!"
+no-ssh_msg: "Could not communicate with {}!"
