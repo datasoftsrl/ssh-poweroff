@@ -3,13 +3,13 @@ Description=SSH Poweroff web service
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/gunicorn -b 0.0.0.0:<port> sshpoff:app
+ExecStart=<prefix>/bin/gunicorn -b 0.0.0.0:<port> sshpoff:app
 WorkingDirectory=/opt/ssh-poweroff
 Restart=always
 RestartSec=10
 StandardOutput=syslog
 StandardError=syslog
-SyslogIdentifier=ppoff
+SyslogIdentifier=sshpoff
 User=root
 Group=root
 

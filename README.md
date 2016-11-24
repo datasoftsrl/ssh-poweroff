@@ -32,7 +32,7 @@ pacman -S --noconfirm curl
 Then launch the following command:
 
 ```shell
-curl -sL https://gitlab.com/datasoftsrl/ssh-poweroff/raw/master/install.py | python -
+curl -sL https://gitlab.com/datasoftsrl/ssh-poweroff/raw/master/install.py | python3 -
 ```
 
 **NOTE**: do not forget to edit the configuration file (see next paragraph).
@@ -49,9 +49,9 @@ instead.
 ## Usage
 After installation the software should be already started and activated.
 
-### Starting/stopping systemd service
-To start the service use `systemctl start ppoff` and to stop
-`systemctl stop ppoff`.
+### Starting/stopping SystemD service
+To start the service use `systemctl start sshpoff` and to stop
+`systemctl stop sshpoff`.
 
 ### When config is updated
 Remember to `systemctl restart sshppoff` when `config.yml` is modified.
@@ -60,7 +60,7 @@ Remember to `systemctl restart sshppoff` when `config.yml` is modified.
 To see error log use SystemD log facility, with the command:
 
 ```shell
-journalctl -xeb -u ppoff
+journalctl -xeb -u sshpoff
 ```
 
 **NOTE**: with this command you will display only this application log, from
@@ -70,4 +70,12 @@ Or:
 
 ```shell
 systemctl status sshpoff
+```
+
+## Uninstallation
+To uninstall this software go to installation dir (default to
+`/opt/ssh-poweroff` and launch this command:
+
+```shell
+python3 uninstall.py
 ```
