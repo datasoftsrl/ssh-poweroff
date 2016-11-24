@@ -8,7 +8,7 @@ projectors.
 ## Requirements
 The project is exclusively tested on Debian 8 Jessie.
 
-- `Python` >= `3.5`
+- `Python` >= `3.4`
 - `systemd` >= `215`
 - `Flask` >= `0.11.1`
 - `gunicorn` >= `19.6.0`
