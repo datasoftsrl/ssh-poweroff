@@ -6,14 +6,13 @@ from os import path
 
 import yaml
 
-PREFIX = path.dirname(path.realpath(__file__))
-
-PATH = '/opt/ssh-poweroff'
 REPO = 'https://gitlab.com/datasoftsrl/ssh-poweroff.git'
+PATH = '/opt/ssh-poweroff'
 WD = '/tmp/ssh-poweroff'
 
 def cmd(command):
-  sp.run(command, stdin=sp.DEVNULL, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+  return sp.check_call(command, stdin=sp.DEVNULL, stdout=sp.DEVNULL,
+    stderr=sp.DEVNULL)
 
 if __name__ == '__main__':
   if os.geteuid() == 0:
@@ -42,7 +41,7 @@ if __name__ == '__main__':
       # installation commands (it will remove everything in 
       cmd(['pip3', 'install', 'flask pyyaml gunicorn pexpect'])
       cmd(['git', 'clone', REPO, WD])
-      cmd(['rm', '-rf', PATH])
+      sh.rmtree(PATH, ignore_errors=True)
       sh.copytree(WD, PATH)
 
       # write a systemd unit file
