@@ -14,7 +14,7 @@ def msg(message, dots=True):
   print('[*] {}{}'.format(message, _dots))
 
 def ok():
-  msg('done', dots=True)
+  msg('done', dots=False)
 
 def errror(message):
   print('[!] error: {}.'.format(message))

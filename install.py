@@ -9,13 +9,13 @@ PATH = '/opt/ssh-poweroff'
 WD = '/tmp/ssh-poweroff'
 
 def msg(message, dots=True):
-  dots = "."
+  _dots = "."
   if dots:
-    dots = '...'
-  print('[*] {}{}'.format(message, dots))
+    _dots = '...'
+  print('[*] {}{}'.format(message, _dots))
 
 def ok():
-  msg('done', dots=True)
+  msg('done', dots=False)
 
 def errror(message):
   print('[!] error: {}.'.format(message))
