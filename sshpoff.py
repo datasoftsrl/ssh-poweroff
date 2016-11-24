@@ -15,7 +15,7 @@ from pexpect.pxssh import (
   ExceptionPxssh
 )
 
-VERSION = '1.1.1'
+VERSION = '1.2.1'
 
 CONF_PATH = path.join(
   path.dirname(__file__),
@@ -42,10 +42,10 @@ Check if config key is present, otherwise use default.
 default = {
   'title': 'Poweroff',
   'devices': [],
-  'poweroff_all': 'Power off all devices!',
-  'success_msg': '{} successfully turned off.',
-  'unvalid_msg': '{} is not valid!',
-  'no_ssh_msg': 'Could not communicate with {}!'
+  'poweroff-all': 'Power off all devices!',
+  'success-msg': '{} successfully turned off.',
+  'unvalid-msg': '{} is not valid!',
+  'no-ssh-msg': 'Could not communicate with {}!'
 }
 default.update(config)
 config = default
@@ -104,7 +104,7 @@ def home():
     version = VERSION,
     dev_names = list(devices.keys()),
     col_dev = zip(_random_colors(), config['devices']),
-    all_button = config['poweroff_all']
+    all_button = config['poweroff-all']
   )
 
 @app.route('/command', methods=['POST'])
@@ -129,9 +129,9 @@ def command():
       )
       ssh.sendline(properties['command'])
       ssh.logout()
-      return config['success_msg'].format(name)
+      return config['success-msg'].format(name)
     except (KeyError, ExceptionPxssh) as e:
       if isinstance(e, KeyError):
-        return config['unvalid_msg'].format(name)
+        return config['unvalid-msg'].format(name)
       elif isinstance(e, ExceptionPxssh):  
-        return config['no-ssh_msg'].format(name)
+        return config['no-ssh-msg'].format(name)

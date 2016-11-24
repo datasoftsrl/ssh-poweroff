@@ -18,10 +18,10 @@ devices:
     command: "halt"
 
 # button messages
-poweroff_all: "Power off all devices!"
+poweroff-all: "Power off all devices!"
 
 # error/success messages
 # {} is replaced with device name
-success_msg: "{} successfully turned off."
-unvalid_msg: "{} is not valid!"
-no-ssh_msg: "Could not communicate with {}!"
+success-msg: "{} successfully turned off."
+unvalid-msg: "{} is not valid!"
+no-ssh-msg: "Could not communicate with {}!"
