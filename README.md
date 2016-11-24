@@ -16,18 +16,32 @@ The project is exclusively tested on Debian 8 Jessie.
 - `PyYAML` >= `3.11`
 
 ## Installation
-To begin the installation, `su` into root account, `cd` to a writable folder
-(`/tmp` should be perfect) and launch the following command:
+To begin the installation, `su` into root account and install `curl`.
+If you are on Debian:
 
-`curl -sL https://gitlab.com/datasoftsrl/projector-poweroff/raw/master/install.py | python -`
+```shell
+apt-get install -y curl
+```
 
-Do not forget to edit the configuration file.
+Or if you are on Arch Linux
+
+```shell
+pacman -S --noconfirm curl
+```
+
+Then launch the following command:
+
+```shell
+curl -sL https://gitlab.com/datasoftsrl/ssh-poweroff/raw/master/install.py | python -
+```
+
+**NOTE**: do not forget to edit the configuration file (see next paragraph).
 
 ## Configuration
 Configuration is to be written in the YAML format.
 
 Config is read from a file located in the installation path (by default
-`/opt/projector-poweroff/config.yml`) and a commented example is provided.
+`/opt/ssh-poweroff/config.yml`) and a commented example is provided.
 
 **NOTE**: the YAML format does not accept tabs, so do not use them, use spaces
 instead.
@@ -35,14 +49,25 @@ instead.
 ## Usage
 After installation the software should be already started and activated.
 
+### Starting/stopping systemd service
 To start the service use `systemctl start ppoff` and to stop
 `systemctl stop ppoff`.
 
-Remember to `systemctl restart ppoff` when `config.yml` is modified.
+### When config is updated
+Remember to `systemctl restart sshppoff` when `config.yml` is modified.
 
+### Error log
 To see error log use SystemD log facility, with the command:
 
-`journalctl -xeb -u ppoff`
+```shell
+journalctl -xeb -u ppoff
+```
 
 **NOTE**: with this command you will display only this application log, from
 last boot to now.
+
+Or:
+
+```shell
+systemctl status sshpoff
+```
