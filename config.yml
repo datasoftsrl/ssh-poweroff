@@ -1,6 +1,9 @@
 # application properties
 title: "SSH Poweroff"
 port: 8081
+mail: "mail@example.com"
+#log-path: "/var/log/ssh-poweroff/sshpoff.log"
+log-path: "/tmp/sshpoff.log"
 
 # devices properties (DO NOT USE TABS)
 devices:

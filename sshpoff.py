@@ -15,7 +15,9 @@ from pexpect.pxssh import (
   ExceptionPxssh
 )
 
-VERSION = '1.2.1'
+import log as lg
+
+VERSION = '1.3.0'
 
 CONF_PATH = path.join(
   path.dirname(__file__),
@@ -31,7 +33,7 @@ try:
   config = yaml.safe_load(open(CONF_PATH))
 except:
   print(
-    'Ops, I found an error reading {}, using default.'.format('config.yml'),
+    '[!] ops, I found an error reading {}, using default.'.format('config.yml'),
     file=sys.stderr
   )
   config = {}
@@ -40,7 +42,9 @@ except:
 Check if config key is present, otherwise use default.
 """
 default = {
-  'title': 'Poweroff',
+  'title': 'SSH Poweroff',
+  'mail': 'mail@example.com',
+  'log-path': '/var/log/ssh-poweroff/sshpoff.log',
   'devices': [],
   'poweroff-all': 'Power off all devices!',
   'success-msg': '{} successfully turned off.',
@@ -58,6 +62,11 @@ if len(config['devices']) > 0:
   devices = {x['name']: x for x in config['devices']}
 else:
   devices = {}
+
+"""
+Inititate a logging feature
+"""
+log = lg.Log(config['title'], config['log-path'])
 
 def _random_colors():
   """
@@ -102,6 +111,7 @@ def home():
   return render_template('index.html',
     title = config['title'],
     version = VERSION,
+    mail = config['mail'],
     dev_names = list(devices.keys()),
     col_dev = zip(_random_colors(), config['devices']),
     all_button = config['poweroff-all']
