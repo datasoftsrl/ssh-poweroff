@@ -17,7 +17,7 @@ from pexpect.pxssh import (
 
 import log as lg
 
-VERSION = '1.3.0'
+VERSION = '1.3.1'
 
 CONF_PATH = path.join(
   path.dirname(__file__),
