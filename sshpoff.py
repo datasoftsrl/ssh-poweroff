@@ -64,7 +64,7 @@ else:
   devices = {}
 
 """
-Inititate a logging feature
+Instatiate logging facility.
 """
 log = lg.Log(config['title'], config['log-path'])
 
@@ -108,6 +108,8 @@ def home():
   """
   global config
 
+  log.info('%s connected.', request.remote_addr)
+
   return render_template('index.html',
     title = config['title'],
     version = VERSION,
@@ -139,9 +141,19 @@ def command():
       )
       ssh.sendline(properties['command'])
       ssh.logout()
+      # log
+      log.info('%s -> %s: OK.', request.remote_addr, properties['host'])
       return config['success-msg'].format(name)
     except (KeyError, ExceptionPxssh) as e:
       if isinstance(e, KeyError):
+        # user tried to launch a command on an unexistent device
+        log.error('%s -> %s: invalid device.', request.remote_addr,
+          properties['host']) 
         return config['unvalid-msg'].format(name)
-      elif isinstance(e, ExceptionPxssh):  
+      elif isinstance(e, ExceptionPxssh):
+        # ssh connection failed
+        log.error('%s -> %s: KO.', request.remote_addr, properties['host'])
         return config['no-ssh-msg'].format(name)
+
+if __name__ == '__main__':
+  app.run()

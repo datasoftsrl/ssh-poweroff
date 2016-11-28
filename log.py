@@ -32,7 +32,8 @@ class Log:
           .format(ospath.dirname(path)),
         file=sys.stderr
       )
-      sys.exit(255)
+      print('[!] logging to stderr.', file=sys.stderr)
+      self.handler = lg.StreamHandler()
 
     self.handler.setLevel(lg.INFO)
 
