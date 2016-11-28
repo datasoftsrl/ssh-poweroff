@@ -72,9 +72,25 @@ Or:
 systemctl status sshpoff
 ```
 
+#### Log to file
+A complete log for the application is available (by default at
+`/var/log/ssh-poweroff/sshpoff.log`).
+
+It will display a row for every connection and command, of format:
+
+```shell
+<date> <hostname> <app name>[<pid>]: <level>: <message>.
+```
+
+`<message>` is stylized as such:
+
+```shell
+<source ip> -> <destination ip>: <OK/KO>
+```
+
 ## Uninstallation
-To uninstall this software go to installation dir (default to
-`/opt/ssh-poweroff` and launch this command:
+To uninstall this software go to installation directory (default to
+`/opt/ssh-poweroff`) and launch this command:
 
 ```shell
 python3 uninstall.py
