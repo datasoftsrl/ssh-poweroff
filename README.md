@@ -16,24 +16,49 @@ The project is exclusively tested on Debian 8 Jessie.
 - `PyYAML` >= `3.11`
 
 ## Installation
-To begin the installation, `su` into root account and install `curl`.
-If you are on Debian:
+To begin the installation, `su` into root account.
 
-```shell
-apt-get install -y curl
-```
+There are two methods of installing this software:
 
-Or if you are on Arch Linux
+1. With  `curl`:
 
-```shell
-pacman -S --noconfirm curl
-```
+  If you are on Debian:
 
-Then launch the following command:
+  ```shell
+  apt-get install -y curl
+  ```
 
-```shell
-curl -sL https://gitlab.com/datasoftsrl/ssh-poweroff/raw/master/install.py | python3 -
-```
+  Or if you are on Arch Linux
+
+  ```shell
+  pacman -S --noconfirm curl
+  ```
+
+  Then launch the following command:
+
+  ```shell
+  curl -sL https://gitlab.com/datasoftsrl/ssh-poweroff/raw/master/install.py | python3 -
+  ```
+
+2. With `wget`:
+
+  If you are on Debian (likely already installed):
+
+  ```shell
+  apt-get install -y wget
+  ```
+
+  Or if you are on Arch Linux
+
+  ```shell
+  pacman -S --noconfirm wget
+  ```
+
+  Then launch the following command:
+
+  ```shell
+  wget -O - https://gitlab.com/datasoftsrl/ssh-poweroff/raw/master/install.py | python3 -
+  ```
 
 **NOTE**: do not forget to edit the configuration file (see next paragraph).
 
