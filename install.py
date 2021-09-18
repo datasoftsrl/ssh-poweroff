@@ -36,7 +36,7 @@ if __name__ == '__main__':
         cmd(['pacman', '-S', '--noconfirm', 'python-pip', 'git'])
         prefix = '/usr'
         ok()
-      elif distro == 'ubunutu' or distro == 'debian':
+      elif distro == 'ubuntu' or distro == 'debian':
         msg('installing git and pip3 with apt')
         cmd(['apt-get', 'install', '-y', 'python3-pip', 'git'])
         ok()
